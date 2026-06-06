@@ -253,6 +253,34 @@ export function refreshDashboard() {
   const holidays = load(KEYS.holidays);
 
   const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  const isAtOfficeToday = !!(atOfficeFlags && atOfficeFlags[todayStr]);
+
+  // Render at-office toggle (only on workdays that aren't leave/holiday/weekend)
+  const atOfficeContainer = document.getElementById('dashboard-at-office');
+  if (atOfficeContainer) {
+    const todayDayType = classifyDay(todayStr, holidays, dayOverrides, atOfficeFlags);
+    const showToggle = todayDayType === 'weekday' || todayDayType === 'justWork' || todayDayType === 'atOffice';
+    if (showToggle) {
+      atOfficeContainer.innerHTML = `<label class="at-office-toggle"><input type="checkbox" id="today-at-office"${isAtOfficeToday ? ' checked' : ''}> At Office today</label>`;
+      const checkbox = atOfficeContainer.querySelector('#today-at-office');
+      if (checkbox) {
+        checkbox.addEventListener('change', () => {
+          const flags = load(KEYS.atOffice);
+          if (checkbox.checked) {
+            flags[todayStr] = true;
+          } else {
+            delete flags[todayStr];
+          }
+          save(KEYS.atOffice, flags);
+          refreshDashboard();
+        });
+      }
+    } else {
+      atOfficeContainer.innerHTML = '';
+    }
+  }
+
   const nextMonth = today.getMonth() + 2 > 12 ? 1 : today.getMonth() + 2;
   const nextMonthYear = today.getMonth() + 2 > 12 ? today.getFullYear() + 1 : today.getFullYear();
 
@@ -364,17 +392,17 @@ function renderProjectionCards(container, balances, currentProj, nextProj, minim
 
     html += `<div class="card" data-wallet="${w.key}">`;
     html += `<h3>${w.label}</h3>`;
-    html += `<p class="balance"><strong>Balance:</strong> RM ${balance.toFixed(2)}</p>`;
-    html += `<p class="current-proj"><strong>Remaining this month:</strong> RM ${currProj.toFixed(2)}</p>`;
-    html += `<p class="end-balance"><strong>Est. end-of-month:</strong> RM ${endOfMonth.toFixed(2)}</p>`;
-    html += `<p class="next-proj"><strong>Next month projection:</strong> RM ${nxtProj.toFixed(2)}</p>`;
+    html += `<p class="balance"><span>Current</span><span class="val">${balance.toFixed(2)}</span></p>`;
+    html += `<p class="current-proj separator"><span>Remainder</span><span class="val">${currProj.toFixed(2)}</span></p>`;
+    html += `<p class="end-balance"><span>Balance</span><span class="val">${endOfMonth.toFixed(2)}</span></p>`;
+    html += `<p class="next-proj"><span>Next month</span><span class="val">${nxtProj.toFixed(2)}</span></p>`;
     if (topUp > 0) {
-      html += `<p class="topup"><strong>Top-up needed:</strong> RM ${topUp.toFixed(2)}</p>`;
+      html += `<p class="topup"><span>Top-up</span><span class="val">${topUp.toFixed(2)}</span></p>`;
     } else {
-      html += `<p class="topup ok"><strong>Top-up needed:</strong> None</p>`;
+      html += `<p class="topup ok"><span>Top-up</span><span class="val">—</span></p>`;
     }
     if (needsInterim) {
-      html += `<p class="shortfall warning">⚠ Interim shortfall: RM ${shortfall.toFixed(2)}</p>`;
+      html += `<p class="shortfall warning"><span>Top-up!</span><span class="val">${shortfall.toFixed(2)}</span></p>`;
     }
     html += '</div>';
   }
