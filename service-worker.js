@@ -1,6 +1,6 @@
 // service-worker.js — Cache-first strategy for offline PWA support
 
-const CACHE_VERSION = 'ewm-cache-v4';
+const CACHE_VERSION = 'ewm-cache-v5';
 
 const STATIC_ASSETS = [
   '/',

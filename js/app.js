@@ -345,7 +345,7 @@ function refreshSettings() {
 
 function renderProjectionCards(container, balances, currentProj, nextProj, minimumBalances, topUps) {
   const wallets = [
-    { key: 'goPlus', label: 'Go Plus' },
+    { key: 'goPlus', label: 'Go+' },
     { key: 'card1', label: 'Card 1' },
     { key: 'card2', label: 'Card 2' },
     { key: 'parking', label: 'Parking' },
@@ -387,18 +387,18 @@ function renderFundFlow(container, topUps, billsTotal) {
   html += '<h3>Fund Flow</h3>';
 
   if (topUps.bankToGoPlus > 0) {
-    html += `<p class="flow-item bank-to-goplus">Bank → Go Plus: <strong>RM ${topUps.bankToGoPlus.toFixed(2)}</strong></p>`;
-    html += `<p class="flow-item breakdown">(Go Plus own + linked wallets + bills = RM ${topUps.bankToGoPlus.toFixed(2)})</p>`;
+    html += `<p class="flow-item bank-to-goplus">Bank → Go+: <strong>RM ${topUps.bankToGoPlus.toFixed(2)}</strong></p>`;
+    html += `<p class="flow-item breakdown">(Go+ own + linked wallets + bills = RM ${topUps.bankToGoPlus.toFixed(2)})</p>`;
   }
 
   if (topUps.card1 > 0) {
-    html += `<p class="flow-item">Go Plus → Card 1: <strong>RM ${topUps.card1.toFixed(2)}</strong></p>`;
+    html += `<p class="flow-item">Go+ → Card 1: <strong>RM ${topUps.card1.toFixed(2)}</strong></p>`;
   }
   if (topUps.card2 > 0) {
-    html += `<p class="flow-item">Go Plus → Card 2: <strong>RM ${topUps.card2.toFixed(2)}</strong></p>`;
+    html += `<p class="flow-item">Go+ → Card 2: <strong>RM ${topUps.card2.toFixed(2)}</strong></p>`;
   }
   if (topUps.parking > 0) {
-    html += `<p class="flow-item">Go Plus → Parking: <strong>RM ${topUps.parking.toFixed(2)}</strong></p>`;
+    html += `<p class="flow-item">Go+ → Parking: <strong>RM ${topUps.parking.toFixed(2)}</strong></p>`;
   }
 
   if (topUps.bankToGoPlus === 0 && topUps.card1 === 0 && topUps.card2 === 0 && topUps.parking === 0) {

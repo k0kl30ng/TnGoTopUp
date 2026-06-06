@@ -15,7 +15,7 @@ export function renderRateTable(container, rateTable) {
     { key: 'onLeave', label: 'On Leave' }
   ];
   const wallets = [
-    { key: 'goPlus', label: 'Go Plus' },
+    { key: 'goPlus', label: 'Go+' },
     { key: 'card1', label: 'Card 1' },
     { key: 'card2', label: 'Card 2' },
     { key: 'parking', label: 'Parking' }
@@ -73,7 +73,7 @@ export function renderBillsList(container, bills) {
  */
 export function renderBalanceEditors(container, balances) {
   const wallets = [
-    { key: 'goPlus', label: 'Go Plus' },
+    { key: 'goPlus', label: 'Go+' },
     { key: 'card1', label: 'Card 1' },
     { key: 'card2', label: 'Card 2' },
     { key: 'parking', label: 'Parking' }
@@ -100,7 +100,7 @@ export function renderBalanceEditors(container, balances) {
  */
 export function renderMiscEditors(container, monthlyMisc) {
   const wallets = [
-    { key: 'goPlus', label: 'Go Plus' },
+    { key: 'goPlus', label: 'Go+' },
     { key: 'card1', label: 'Card 1' },
     { key: 'card2', label: 'Card 2' },
     { key: 'parking', label: 'Parking' }
@@ -127,7 +127,7 @@ export function renderMiscEditors(container, monthlyMisc) {
  */
 export function renderMinBalanceEditors(container, minimumBalances) {
   const wallets = [
-    { key: 'goPlus', label: 'Go Plus' },
+    { key: 'goPlus', label: 'Go+' },
     { key: 'card1', label: 'Card 1' },
     { key: 'card2', label: 'Card 2' },
     { key: 'parking', label: 'Parking' }
