@@ -1,0 +1,14 @@
+{
+  "name": "tngotopup",
+  "version": "1.0.0",
+  "description": "E-Wallet Monitor PWA - Monthly expense projections and top-up calculator",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.js\"",
+    "start": "npx serve ."
+  },
+  "devDependencies": {
+    "fast-check": "^4.8.0",
+    "jsdom": "^29.1.1"
+  }
+}

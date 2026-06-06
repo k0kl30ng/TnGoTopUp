@@ -1,0 +1,766 @@
+/* E-Wallet Monitor — Core Styles */
+
+/* Day-type colour scheme */
+:root {
+  --color-weekday: #000000;
+  --color-saturday: #0000ff;
+  --color-sunday-holiday: #1b7a3d;
+  --color-just-work: #800000;
+  --color-just-babysitters: #ff0000;
+  --color-on-leave: #cc7722;
+
+  /* App theme */
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #666666;
+  --color-primary: #1a1a2e;
+  --color-primary-light: #16213e;
+  --color-border: #e0e0e0;
+  --color-error: #d32f2f;
+  --color-warning: #e65100;
+
+  --radius: 8px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-width: 320px;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ─── Header & Navigation ────────────────────────────────────────────────── */
+
+.app-header {
+  background: var(--color-primary);
+  color: #fff;
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-header h1 {
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.app-nav {
+  display: flex;
+  gap: var(--spacing-xs);
+  justify-content: center;
+}
+
+.nav-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-btn.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Main Content Area ──────────────────────────────────────────────────── */
+
+.app-main {
+  padding: var(--spacing-sm);
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Views */
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+/* ─── Dashboard: Projection Cards ────────────────────────────────────────── */
+
+.projection-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+}
+
+.card h3 {
+  font-size: 0.95rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-primary);
+}
+
+.card p {
+  font-size: 0.85rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.card .balance {
+  font-weight: 600;
+}
+
+.card .shortfall.warning {
+  color: var(--color-warning);
+  font-weight: 600;
+}
+
+.card .topup {
+  color: var(--color-error);
+  font-weight: 600;
+  margin-top: var(--spacing-xs);
+  padding-top: var(--spacing-xs);
+  border-top: 1px solid var(--color-border);
+}
+
+.card .topup.ok {
+  color: var(--color-sunday-holiday);
+}
+
+.card .end-balance {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ─── Dashboard: Fund Flow ───────────────────────────────────────────────── */
+
+.fund-flow {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+}
+
+.fund-flow h3 {
+  font-size: 0.95rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-primary);
+}
+
+.flow-item {
+  font-size: 0.85rem;
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.flow-item:last-child {
+  border-bottom: none;
+}
+
+.flow-item.bank-to-goplus {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: var(--spacing-sm) 0;
+}
+
+.flow-item.breakdown {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding-top: 0;
+  margin-top: calc(-1 * var(--spacing-xs));
+}
+
+.flow-item.none {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ─── Calendar Grid ──────────────────────────────────────────────────────── */
+
+.calendar-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+  padding: 0 var(--spacing-xs);
+}
+
+.calendar-controls button {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+  font-size: 1rem;
+  min-width: 36px;
+  min-height: 36px;
+}
+
+.calendar-controls button:hover {
+  background: var(--color-bg);
+}
+
+#calendar-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.calendar-grid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.calendar-grid th {
+  padding: var(--spacing-xs);
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.calendar-grid td {
+  padding: var(--spacing-xs) 2px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 4px;
+  height: 36px;
+}
+
+.calendar-grid td.calendar-day:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.calendar-grid td.at-office .day-num {
+  text-decoration: underline;
+  text-decoration-color: #ffeb3b;
+  text-underline-offset: 2px;
+}
+
+.calendar-grid .office-indicator {
+  font-size: 0.45rem;
+  margin-left: 1px;
+  color: #ffeb3b;
+}
+
+/* Day-type inline colours in calendar */
+.calendar-grid td[style*="color:black"] { color: var(--color-weekday) !important; font-weight: 600; }
+.calendar-grid td[style*="color:blue"] { color: var(--color-saturday) !important; font-weight: 600; }
+.calendar-grid td[style*="color:green"] { color: var(--color-sunday-holiday) !important; font-weight: 600; }
+.calendar-grid td[style*="color:maroon"] { color: var(--color-just-work) !important; font-weight: 600; }
+.calendar-grid td[style*="color:red"] { color: var(--color-just-babysitters) !important; font-weight: 600; }
+.calendar-grid td[style*="color:ochre"] { color: var(--color-on-leave) !important; font-weight: 600; }
+
+/* ─── Settings: General ──────────────────────────────────────────────────── */
+
+#view-settings h3 {
+  font-size: 1rem;
+  margin-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+#view-settings h4 {
+  font-size: 0.9rem;
+  margin: var(--spacing-md) 0 var(--spacing-sm);
+  color: var(--color-text);
+}
+
+#view-settings > div {
+  margin-bottom: var(--spacing-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+}
+
+/* ─── Settings: Rate Table ───────────────────────────────────────────────── */
+
+.rate-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.rate-table th,
+.rate-table td {
+  padding: var(--spacing-xs);
+  text-align: center;
+  border: 1px solid var(--color-border);
+}
+
+.rate-table th {
+  background: var(--color-bg);
+  font-weight: 600;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.rate-table td:first-child {
+  text-align: left;
+  font-weight: 500;
+  white-space: nowrap;
+  font-size: 0.7rem;
+}
+
+.rate-table input[type="number"] {
+  width: 100%;
+  min-width: 0;
+  padding: 2px 4px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* ─── Settings: Editor Rows (Balances, Misc, Min Balances) ───────────────── */
+
+.editor-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.editor-row:last-child {
+  border-bottom: none;
+}
+
+.editor-row label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  min-width: 70px;
+}
+
+.editor-row input[type="number"] {
+  width: 120px;
+  max-width: 50%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+/* ─── Settings: Bills ────────────────────────────────────────────────────── */
+
+.bills-list {
+  margin-bottom: var(--spacing-sm);
+}
+
+.bill-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.85rem;
+}
+
+.bill-row:last-child {
+  border-bottom: none;
+}
+
+.bill-name {
+  font-weight: 500;
+  flex: 1;
+  min-width: 60px;
+}
+
+.bill-amount {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bill-frequency {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.btn-edit-bill,
+.btn-remove-bill {
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  cursor: pointer;
+}
+
+.btn-remove-bill {
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.btn-add-bill,
+.btn-add-holiday,
+.btn-add-school-holiday {
+  display: inline-block;
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: 0.8rem;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-add-bill:hover,
+.btn-add-holiday:hover,
+.btn-add-school-holiday:hover {
+  background: var(--color-primary-light);
+}
+
+/* ─── Settings: Holidays ─────────────────────────────────────────────────── */
+
+.holidays-list,
+.school-holidays-list {
+  margin-bottom: var(--spacing-sm);
+}
+
+.holiday-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.85rem;
+}
+
+.holiday-row:last-child {
+  border-bottom: none;
+}
+
+.holiday-date,
+.holiday-dates {
+  font-weight: 500;
+  color: var(--color-sunday-holiday);
+  min-width: 80px;
+}
+
+.holiday-name {
+  flex: 1;
+  min-width: 60px;
+}
+
+.btn-edit-holiday,
+.btn-remove-holiday,
+.btn-edit-school-holiday,
+.btn-remove-school-holiday {
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  cursor: pointer;
+}
+
+.btn-remove-holiday,
+.btn-remove-school-holiday {
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* ─── Settings: Export/Import ────────────────────────────────────────────── */
+
+.export-import-controls {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.export-import-controls button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  cursor: pointer;
+}
+
+.export-import-controls button:hover {
+  background: var(--color-bg);
+}
+
+/* ─── Day Editor Overlay ─────────────────────────────────────────────────── */
+
+.day-editor-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--spacing-md);
+}
+
+.day-editor {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.day-editor h4 {
+  margin-bottom: var(--spacing-md);
+  font-size: 1rem;
+}
+
+.day-editor label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.day-editor select {
+  width: 100%;
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+}
+
+.day-editor label:has(input[type="checkbox"]) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  cursor: pointer;
+}
+
+.day-editor button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-right: var(--spacing-sm);
+}
+
+.day-editor button[data-action="save-day"] {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+/* ─── Responsive: Tablet (768px+) ────────────────────────────────────────── */
+
+@media (min-width: 768px) {
+  .app-header {
+    padding: var(--spacing-md);
+  }
+
+  .app-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .nav-btn {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.875rem;
+  }
+
+  .app-main {
+    padding: var(--spacing-md);
+  }
+
+  /* Dashboard: 2-column grid for cards */
+  .projection-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .card h3 {
+    font-size: 1rem;
+  }
+
+  .card p {
+    font-size: 0.9rem;
+  }
+
+  /* Calendar: larger day cells */
+  .calendar-grid th {
+    font-size: 0.8rem;
+    padding: var(--spacing-sm);
+  }
+
+  .calendar-grid td {
+    padding: var(--spacing-sm);
+    height: 44px;
+    font-size: 0.9rem;
+  }
+
+  #calendar-title {
+    font-size: 1.1rem;
+  }
+
+  /* Settings: Rate table larger text */
+  .rate-table {
+    font-size: 0.85rem;
+  }
+
+  .rate-table th {
+    font-size: 0.8rem;
+    padding: var(--spacing-sm);
+  }
+
+  .rate-table td {
+    padding: var(--spacing-sm);
+  }
+
+  .rate-table input[type="number"] {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+  }
+
+  .editor-row label {
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+
+  .editor-row input[type="number"] {
+    width: 150px;
+  }
+
+  .bill-row {
+    font-size: 0.9rem;
+  }
+
+  .holiday-row {
+    font-size: 0.9rem;
+  }
+}
+
+/* ─── Responsive: Desktop (1200px+) ─────────────────────────────────────── */
+
+@media (min-width: 1200px) {
+  .app-main {
+    padding: var(--spacing-lg);
+  }
+
+  /* Dashboard: 4-column grid at large screens */
+  .projection-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .card {
+    padding: var(--spacing-lg);
+  }
+
+  .card h3 {
+    font-size: 1.05rem;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+  }
+
+  .fund-flow {
+    padding: var(--spacing-lg);
+  }
+
+  .flow-item {
+    font-size: 0.95rem;
+  }
+
+  /* Calendar: more spacious */
+  .calendar-grid td {
+    height: 52px;
+    font-size: 1rem;
+  }
+
+  .calendar-grid th {
+    font-size: 0.9rem;
+  }
+
+  .calendar-grid .office-indicator {
+    font-size: 0.55rem;
+  }
+
+  /* Settings: wider inputs */
+  .rate-table {
+    font-size: 0.9rem;
+  }
+
+  .rate-table input[type="number"] {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+
+  .editor-row label {
+    min-width: 120px;
+  }
+
+  .editor-row input[type="number"] {
+    width: 180px;
+  }
+}
+
+/* ─── Utility: prevent overflow ──────────────────────────────────────────── */
+
+table {
+  max-width: 100%;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
